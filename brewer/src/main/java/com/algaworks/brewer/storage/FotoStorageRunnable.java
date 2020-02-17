@@ -19,9 +19,9 @@ public class FotoStorageRunnable implements Runnable {
 
 	@Override
 	public void run() {		
-		String novoFoto = this.fotoStorage.salvarTemporariamente(files);		
+		String nomeFoto = this.fotoStorage.salvar(files);		
 		String contentType = files[0].getContentType();		
-		result.setResult(new FotoDTO(novoFoto, contentType));
+		result.setResult(new FotoDTO(nomeFoto, contentType, fotoStorage.getUrl(nomeFoto)));
 	}
 
 }

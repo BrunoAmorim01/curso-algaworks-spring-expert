@@ -6,6 +6,7 @@ Brewer.uploadFoto = (function() {
 		this.inputNomeFoto = $('input[name=foto]');
 		this.inputContentType = $('input[name=contentType]');		
 		this.novaFoto = $('input[name=novaFoto]');
+		this.inputUrlFoto = $('input[name=urlFoto]');
 		
 		this.htmlFotoCervejaTemplate = $('#foto-cerveja').html();
 		this.template = Handlebars.compile(this.htmlFotoCervejaTemplate);
@@ -14,12 +15,14 @@ Brewer.uploadFoto = (function() {
 
 		this.containerFotoCerveja = $('.js-container-foto-cerveja');
 
-		this.uploadDrop = $('#upload-drop');		
+		this.uploadDrop = $('#upload-drop');
+		this.imgLoading = $('.js-img-loading');
 
 		if (this.inputNomeFoto.val()) {
 			renderizarFoto.call(this, ({
 				nome : this.inputNomeFoto.val(),
-				contentType : this.inputContentType.val()
+				contentType : this.inputContentType.val(),
+				url: this.inputUrlFoto.val()
 			}));
 		}
 	}
@@ -31,11 +34,17 @@ Brewer.uploadFoto = (function() {
 			allow : '*.(jpg|jpeg|png)',
 			action : this.containerFotoCerveja.data('url-fotos'),
 			complete : onUploadCompleto.bind(this),
-			beforeSend : adicionarCsrfToken
+			beforeSend : adicionarCsrfToken,
+			loadstart: onLoadStart.bind(this)
 		};
 
 		UIkit.uploadSelect($('#upload-select'), settings);
 		UIkit.uploadDrop(this.uploadDrop, settings);
+	}
+	
+	function onLoadStart() {
+		this.imgLoading.removeClass('hidden');
+		
 	}
 
 	function adicionarCsrfToken(xhr) {
@@ -46,6 +55,8 @@ Brewer.uploadFoto = (function() {
 
 	function onUploadCompleto(resposta) {
 		this.novaFoto.val('true');
+		this.inputUrlFoto.val(resposta.url);
+		this.imgLoading.addClass('hidden');
 		renderizarFoto.call(this, resposta);
 	}
 	
@@ -54,14 +65,15 @@ Brewer.uploadFoto = (function() {
 		this.inputContentType.val(resposta.contentType);
 
 		this.uploadDrop.addClass('hidden');
-
+		
+		/*
 		var foto = '';
 		if(this.novaFoto.val() == 'true'){
 			foto = 'temp/'
 		}
 		foto += resposta.nome; 
-
-		var htmlFotoCerveja = this.template({foto : foto});
+		*/
+		var htmlFotoCerveja = this.template({url: resposta.url});
 		this.containerFotoCerveja.append(htmlFotoCerveja);
 
 		$('.js-remove-foto').on('click', onRemoverFoto.bind(this))

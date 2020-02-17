@@ -28,7 +28,7 @@ public class CadastroCervejaService {
 	@Transactional
 	public void salvar (Cerveja cerveja) { 
 		cervejas.save(cerveja);
-		publisher.publishEvent(new CervejaSalvaEvent(cerveja));
+		//publisher.publishEvent(new CervejaSalvaEvent(cerveja));
 		
 	}
 	

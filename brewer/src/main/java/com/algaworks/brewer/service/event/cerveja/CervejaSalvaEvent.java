@@ -3,7 +3,8 @@ package com.algaworks.brewer.service.event.cerveja;
 import org.springframework.util.StringUtils;
 
 import com.algaworks.brewer.model.Cerveja;
-
+//nao e mais usado
+@Deprecated
 public class CervejaSalvaEvent {
 	
 	private Cerveja cerveja;
