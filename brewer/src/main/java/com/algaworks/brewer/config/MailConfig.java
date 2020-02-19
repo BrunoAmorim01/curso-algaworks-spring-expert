@@ -15,7 +15,7 @@ import com.algaworks.brewer.mail.Mailer;
 
 @Configuration
 @ComponentScan(basePackageClasses = Mailer.class)
-//@PropertySource({"classpath:env/mail-${ambiente:local}.properties"})
+@PropertySource({"classpath:env/mail-${ambiente:local}.properties"})
 @PropertySource(value = {"file://${HOME}/.brewer.mail.properties"}, ignoreResourceNotFound = true)
 public class MailConfig {
 	
@@ -28,7 +28,7 @@ public class MailConfig {
 		mailSender.setHost("smtp.sendgrid.net");
 		mailSender.setPort(587);
 		mailSender.setUsername(env.getProperty("username"));
-		mailSender.setPassword(env.getProperty("password"));		
+		mailSender.setPassword(env.getProperty("SENDGRID_PASSWORD"));		
 		
 		Properties props = new Properties();
 		props.put("mail.transport.protocol", "smtp");
