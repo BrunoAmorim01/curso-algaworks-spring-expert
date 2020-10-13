@@ -66,7 +66,7 @@
 		<thymeleaf-extras-springsecurity.version>3.0.4.RELEASE</thymeleaf-extras-springsecurity.version>
 
 		<!-- JUnit -->
-		<junit.version>4.13</junit.version>
+		<junit.version>4.13.1</junit.version>
 
 		<!-- Java Mail -->
 		<javax.mail.version>1.5.6</javax.mail.version>
