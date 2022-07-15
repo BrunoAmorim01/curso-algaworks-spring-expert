@@ -75,7 +75,7 @@
 		<s3ninja.version>2.7</s3ninja.version>
 
 		<!-- AWS SDK - S3 <aws-java-sdk-s3.version>1.10.77</aws-java-sdk-s3.version> -->
-		<aws-java-sdk-s3.version>1.11.722</aws-java-sdk-s3.version>
+		<aws-java-sdk-s3.version>1.12.261</aws-java-sdk-s3.version>
 
 		<!-- Apache Commons DBCP -->
 		<commons-dbcp2.version>2.1.1</commons-dbcp2.version>
